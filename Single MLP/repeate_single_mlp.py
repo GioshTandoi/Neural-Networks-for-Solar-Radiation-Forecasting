@@ -19,7 +19,7 @@ import matplotlib.pyplot as plt
     a SINGLE MLP different times 
     and prints all the resulting errors in a .csv, and only for the 
     best one it also prints to the console a scatter plot, and 
-    another plot picturing the real trsting values against the 
+    another plot picturing the real testing values against the 
     predicted ones. 
 """
 rmses = []
@@ -51,10 +51,10 @@ for j in range(10):
     #features, drop the 'r_inc' values if it is not included in the feature set
     data = data.drop(columns=['r_inc'])
     raw_data = np.array(data.values)
-    
-    #--------------------------------------------1-make time serie stationary
-    diff_values = mlp.difference(raw_data, 1)
     n_features = raw_data.shape[1]
+    n_features = n_features*lag_size
+    #--------------------------------------------1-make time serie stationary
+    diff_values = mlp.difference(raw_data, 1)    
     diff_r_inc = mlp.difference(r_inc, 1)
     
     #-----------------------2-reframe the time series as a supervised learning problem
@@ -71,7 +71,7 @@ for j in range(10):
     model = mlp.fit_mlp(train, batch_size, n_epochs, n_neurons, time_steps,
                     lag_size, n_features)
     
-    n_features = n_features*lag_size
+    
     X_train = pd.DataFrame(data=train[:, 0:n_features]).values
     
     test_X, test_y = test[:, 0:n_features], test[:, n_features:]

@@ -4,13 +4,9 @@ Created on Sat Nov 17 01:20:12 2018
 
 @author: Giorgia Tandoi
 """
-from math import sqrt
-import matplotlib.pyplot as plt
-import time as t
+
 import pandas as pd
 from sklearn.neural_network import MLPRegressor
-from sklearn.preprocessing import MinMaxScaler
-from sklearn import metrics
 import numpy as np
 
 # convert series to supervised learning
@@ -62,6 +58,7 @@ def inverse_transform(history, test_X, yhat, n_features, scaler):
         X = np.array(test_X[i])
         X = X.reshape(1, test_X.shape[1])
         X_and_forecast = np.concatenate((X,forecast), axis=1)
+        
         inv_scale = np.array(scaler.inverse_transform(X_and_forecast))
         inv_scale = np.array(inv_scale[0, n_features:])
         
@@ -76,9 +73,8 @@ def inverse_transform(history, test_X, yhat, n_features, scaler):
     return inverted
 
 
-# fit an LSTM network to training data
+# fit a mlp network to training data
 def fit_mlp(train, batch_size, nb_epoch, neurons, time_steps, lag_size, n_features):
-	n_features = n_features*lag_size
 	X, y = train[:, 0:n_features], train[:, n_features:]
 	model = MLPRegressor(hidden_layer_sizes=neurons, activation='tanh', 
                       solver='lbfgs', batch_size=batch_size, random_state=1)

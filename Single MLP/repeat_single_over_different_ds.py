@@ -80,10 +80,11 @@ for file in os.listdir(directory):
             #project solar radiation values
             r_inc = data['r_inc'].values
             raw_data = np.array(data.values)
-           
-            #--------------------------------------------1-make time serie stationary
-            diff_values = mlp.difference(raw_data, 1)
             n_features = raw_data.shape[1]
+            n_features = n_features*lag_size
+            
+            #--------------------------------------------1-make time serie stationary
+            diff_values = mlp.difference(raw_data, 1)           
             diff_r_inc = mlp.difference(r_inc, 1)
             
             #-----------------------2-reframe the time series as supervised learning problem
@@ -99,7 +100,6 @@ for file in os.listdir(directory):
             model = mlp.fit_mlp(train, batch_size, n_epochs, n_neurons, time_steps,
                             lag_size, n_features)
             
-            n_features = n_features*lag_size
             X_train = pd.DataFrame(data=train[:, 0:n_features]).values
             
             yhat = np.array(model.predict(test_X))
