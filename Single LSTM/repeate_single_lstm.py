@@ -22,7 +22,7 @@ from keras.layers import LSTM
     a single LSTM for different times 
     and prints to the console a scatter plot, and 
     another plot picturing the real testing values against the 
-    predicted ones, only for the . 
+    predicted ones, only for the best results. 
 """
 
 rmses = []

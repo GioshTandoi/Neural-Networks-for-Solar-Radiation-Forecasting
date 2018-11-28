@@ -2,19 +2,14 @@
 """
 Created on Fri Nov 16 17:18:03 2018
 
-@author: Giorgia Tandoi
+@author: Utente
 """
 
 import pandas as pd
 import numpy as np
-from math import sqrt
-import matplotlib.pyplot as plt
-from sklearn.preprocessing import MinMaxScaler
-from sklearn import metrics
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import LSTM
-import time as t
 
 pd.set_option('display.max_rows', 10)
 pd.set_option('display.max_columns', 500)
@@ -63,7 +58,6 @@ def inverse_transform(history, test_X, yhat, n_features, scaler):
         forecast = np.array(yhat[i])
         forecast = forecast.reshape(1, len(forecast))
         X = np.array(test_X[i])
-        #X = X.reshape(1, X.shape[0])
         X_and_forecast = np.concatenate((X,forecast), axis=1)
         inv_scale = np.array(scaler.inverse_transform(X_and_forecast))
         inv_scale = np.array(inv_scale[0, n_features:])
