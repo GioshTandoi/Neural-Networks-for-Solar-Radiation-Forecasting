@@ -2,7 +2,7 @@
 """
 Created on Tue Oct  9 15:51:37 2018
 
-@author: Utente
+@author: Giorgia Tandoi
 """
 from arch.bootstrap import StationaryBootstrap, CircularBlockBootstrap
 import pandas as pd
