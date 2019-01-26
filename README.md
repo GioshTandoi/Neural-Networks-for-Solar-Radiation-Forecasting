@@ -30,6 +30,8 @@ This study has been possible thanks to a dataset made available by [SysMan](http
 4. Solar Radiation 
 These values originally had a hourly resolution: they have been averaged to compute their daily values, therefore the dataset utilized for the 
 forecasting process ultimately comprised 243 records. 
+
+
 ![alt text](https://github.com/GioshTandoi/Neural-Networks-for-Solar-Radiation-Forecasting/blob/master/forecasting_pipeline2.png)
   
 The diagram above shows the process implemented in order to forecast the solar radiation: the forecasting pipeline. 
